@@ -7,6 +7,10 @@ class EmployeeService {
     getEmployees(){
         return axios.get(EMPLOYEE_API_BASE_URL + '/all');
     }
+
+    getEmployeePositions(){
+        return axios.get(EMPLOYEE_API_BASE_URL + '/positions');
+    }
 }
 
 export default new EmployeeService();

@@ -8,6 +8,7 @@ export default class EmployeeList extends Component {
         this.state = {
             employees: []
         }
+        this.addEmployee = this.addEmployee.bind(this);
     }
 
     componentDidMount(){
@@ -17,12 +18,18 @@ export default class EmployeeList extends Component {
         });
     }
 
+    addEmployee(){
+       this.props.history.push('/add');
+    }
+
     render() {
         return (
             <div className="container">
-                <h2 className="text-center">Employee</h2>
+                <h2 className="text-center">Employees</h2>
+                <button className="btn btn-primary" onClick={this.addEmployee}>Add Employee</button>
                 <div className="row">
-                    <table className="table table-striped table-hover mt-5">
+                    
+                    <table className="table table-striped table-hover ">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -49,6 +56,7 @@ export default class EmployeeList extends Component {
 
                         </tbody>
                     </table>
+                   
                 </div>
                 
             </div>
