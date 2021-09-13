@@ -21,6 +21,7 @@ export default class CreateEditEmployee extends Component {
         this.changeLoginHandler = this.changeLoginHandler.bind(this);
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changePositionHandler = this.changePositionHandler.bind(this);
+        this.saveEmployee = this.saveEmployee.bind(this);
 
     }
 
@@ -62,8 +63,23 @@ export default class CreateEditEmployee extends Component {
     }
 
     changePositionHandler = event =>  {
-        console.log(event.target.value);
         this.setState({position: event.target.value});
+    }
+
+    saveEmployee = event => {
+        event.preventDefault();
+
+        const employee = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            login: this.state.login,
+            password: this.state.password,
+            position: this.state.position
+        }
+
+        EmployeeService.createEmployee(employee).then(() => {
+            this.props.history.push('/');
+        });
     }
 
     render() {
@@ -134,7 +150,7 @@ export default class CreateEditEmployee extends Component {
 
                                 </div>
 
-                                <button className="btn btn-success" >Save</button>
+                                <button className="btn btn-success" onClick={this.saveEmployee} >Save</button>
                                 <button className="btn btn-danger" >Cancel</button>
 
                             </form>
