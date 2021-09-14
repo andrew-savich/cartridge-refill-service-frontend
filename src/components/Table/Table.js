@@ -1,8 +1,10 @@
 import React from 'react'
+import Utills from '../../utils/Utills'
 
 export const Table = ({entities}) => {
-    console.log('entities: ', entities);
-    const cellNames = Array.from(Object.keys(entities[0]));
+    console.log('creating table with entities: ', entities);
+
+    const columnNames = Utills.getColumnNamesFromEntityKeys(entities[0]);
     
     return (
         
@@ -10,7 +12,7 @@ export const Table = ({entities}) => {
             <table className="table table-striped table-hover ">
                 <thead>
                     <tr>
-                        {cellNames.map((cell, index) => <th key={cell + index}>{cell}</th>)}
+                        {columnNames.map((column, index) => <th key={column + index}>{Utills.camelCaseToNormalWords(column)}</th>)}
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +22,7 @@ export const Table = ({entities}) => {
                                 {Array.from(Object.keys(entity)).map((field, index) => <td key = {entity[field] + index}>{entity[field]}</td>)}
                             </tr>
                         )
+                        
                     }
 
                 </tbody>
