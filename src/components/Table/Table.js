@@ -1,10 +1,10 @@
 import React from 'react'
-import Utills from '../../utils/Utills'
+import { getColumnNamesFromEntityKeys, camelCaseToNormalWords } from '../../utils/Utills';
 
 export const Table = ({entities}) => {
     console.log('creating table with entities: ', entities);
 
-    const columnNames = Utills.getColumnNamesFromEntityKeys(entities[0]);
+    const columnNames = getColumnNamesFromEntityKeys(entities[0]);
     
     return (
         
@@ -12,7 +12,7 @@ export const Table = ({entities}) => {
             <table className="table table-striped table-hover ">
                 <thead>
                     <tr>
-                        {columnNames.map((column, index) => <th key={column + index}>{Utills.camelCaseToNormalWords(column)}</th>)}
+                        {columnNames.map((column, index) => <th key={column + index}>{camelCaseToNormalWords(column)}</th>)}
                     </tr>
                 </thead>
                 <tbody>
