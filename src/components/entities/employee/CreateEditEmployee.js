@@ -22,6 +22,7 @@ export default class CreateEditEmployee extends Component {
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changePositionHandler = this.changePositionHandler.bind(this);
         this.saveEmployee = this.saveEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
 
     }
 
@@ -76,7 +77,7 @@ export default class CreateEditEmployee extends Component {
             lastName: this.state.lastName,
             login: this.state.login,
             password: this.state.password,
-            position: this.state.position
+            position: this.state.currentPosition
         }
 
         if(this.state.id){
@@ -90,6 +91,12 @@ export default class CreateEditEmployee extends Component {
             });
         }
         
+    }
+
+    deleteEmployee = id => {
+        EmployeeService.deleteEmployee(id).then(() => {
+            this.props.history.push('/');
+        });
     }
 
     render() {
@@ -163,9 +170,13 @@ export default class CreateEditEmployee extends Component {
                                 </div>
 
                                 <button className="btn btn-success" onClick={this.saveEmployee} >Save</button>
-                                <button className="btn btn-danger" >Cancel</button>
+                                <button className="btn btn-secondary" >Cancel</button>
 
                             </form>
+                        
+                        {
+                            this.state.id ? <button className="btn btn-danger w-100" onClick={() => this.deleteEmployee(this.state.id)} >Delete</button> : null
+                        }
 
                         </div>
                     </div>
