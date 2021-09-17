@@ -10,6 +10,7 @@ function App() {
         <Route path="/" exact component={EmployeeList}></Route>
         <Route path="/employees" component={EmployeeList}></Route>
         <Route path="/add" component={CreateEditEmployee}></Route>
+        <Route path="/edit/:id" component={CreateEditEmployee}></Route>
       </Switch>
     </div>
   );

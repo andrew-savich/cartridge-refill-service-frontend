@@ -32,7 +32,7 @@ export default class EmployeeList extends Component {
                 <div className="row">
 
                     {
-                     this.state.employees.length !== 0 ? <Table entities={this.state.employees} /> : <h3>Empty</h3>
+                     this.state.employees.length !== 0 ? <Table entities={this.state.employees}/> : <h3>Empty</h3>
                     }
                    
                 </div>

@@ -8,11 +8,11 @@ export default class CreateEditEmployee extends Component {
         
         this.state={
             id: this.props.match.params.id,
-            firstName: '',
-            lastName: '',
             login: '',
             password: '',
-            position: '',
+            firstName: '',
+            lastName: '',
+            currentPosition: '',
             positions: []
         }
 
@@ -25,25 +25,27 @@ export default class CreateEditEmployee extends Component {
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
+        if(this.state.id){
+            EmployeeService.getEmployeeById(this.state.id).then( response => {
+                let employee = response.data;
+                
+                this.setState({
+                    login: employee.login,
+                    password: employee.password,
+                    firstName: employee.firstName,
+                    lastName: employee.lastName,
+                    currentPosition: employee.position,
+                });
+            });
+        } 
+            
+        console.log('got id: ', this.state.id);
         EmployeeService.getEmployeePositions().then( response => {
             this.setState({positions: response.data});
-            console.log('got positions: ', response.data);
         });
-        
-        // if(this.state.id) {
-        //     EmployeeService.getEmployeeById(this.state.id).then( response => {
-        //         let employee = response.data;
-                
-        //         this.setState({
-        //             firstName: employee.firstName,
-        //             lastName: employee.lastName,
-        //             email: employee.email
-        //         });
-        //     });
-        // }
-        
+
     }
 
     changeFirstNameHandler = event => {
@@ -51,7 +53,7 @@ export default class CreateEditEmployee extends Component {
     }
 
     changeLastNameHandler = event =>  {
-        this.setState({firstName: event.target.value});
+        this.setState({lastName: event.target.value});
     }
 
     changeLoginHandler = event =>  {
@@ -63,7 +65,7 @@ export default class CreateEditEmployee extends Component {
     }
 
     changePositionHandler = event =>  {
-        this.setState({position: event.target.value});
+        this.setState({currentPosition: event.target.value});
     }
 
     saveEmployee = event => {
@@ -77,9 +79,17 @@ export default class CreateEditEmployee extends Component {
             position: this.state.position
         }
 
-        EmployeeService.createEmployee(employee).then(() => {
-            this.props.history.push('/');
-        });
+        if(this.state.id){
+            EmployeeService.updateEmployee(employee, this.state.id).then(() => {
+                this.props.history.push('/');
+            });
+
+        } else{
+            EmployeeService.createEmployee(employee).then(() => {
+                this.props.history.push('/');
+            });
+        }
+        
     }
 
     render() {
@@ -135,7 +145,8 @@ export default class CreateEditEmployee extends Component {
                                 <div className="form-group">
                                     <label>Position</label>
                                     
-                                    <select className="form-select" onChange={this.changePositionHandler}>
+                                    <select className="form-select" value={this.state.currentPosition} onChange={this.changePositionHandler}  >
+                                        <option></option>
                                        {
                                            this.state.positions.map((position, index) => (
                                                <option
@@ -146,6 +157,7 @@ export default class CreateEditEmployee extends Component {
                                             </option>
                                             ))
                                        }
+                                       <option >default</option>
                                     </select>
 
                                 </div>
