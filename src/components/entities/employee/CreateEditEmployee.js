@@ -99,6 +99,10 @@ export default class CreateEditEmployee extends Component {
         });
     }
 
+    cancel = event => {
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div>
@@ -144,6 +148,7 @@ export default class CreateEditEmployee extends Component {
                                     <input
                                         placeholder="Password"
                                         name="password"
+                                        type="password"
                                         className="form-control"
                                         value={this.state.password}
                                         onChange={this.changePasswordHandler}
@@ -170,7 +175,7 @@ export default class CreateEditEmployee extends Component {
                                 </div>
 
                                 <button className="btn btn-success" onClick={this.saveEmployee} >Save</button>
-                                <button className="btn btn-secondary" >Cancel</button>
+                                <button className="btn btn-secondary" onClick={this.cancel.bind(this)} >Cancel</button>
 
                             </form>
                         

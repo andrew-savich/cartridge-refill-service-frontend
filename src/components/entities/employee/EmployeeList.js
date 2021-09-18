@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import EmployeeService from '../../../services/EmployeeService';
 import { Table } from '../../Table/Table';
+import { Button } from '../../UI/Button/Button';
 
 export default class EmployeeList extends Component {
     constructor(props){
@@ -28,7 +29,7 @@ export default class EmployeeList extends Component {
         return (
             <div className="container">
                 <h2 className="text-center">Employees</h2>
-                <button className="btn btn-primary" onClick={this.addEmployeeHandler}>Add Employee</button>
+                <Button className="btn btn-primary" onClick={this.addEmployeeHandler} title="Add Employee" />
                 <div className="row">
 
                     {
