@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EmployeeService from '../../../services/EmployeeService';
+import { Button } from '../../UI/Button/Button';
 
 export default class CreateEditEmployee extends Component {
 
@@ -174,13 +175,13 @@ export default class CreateEditEmployee extends Component {
 
                                 </div>
 
-                                <button className="btn btn-success" onClick={this.saveEmployee} >Save</button>
-                                <button className="btn btn-secondary" onClick={this.cancel.bind(this)} >Cancel</button>
+                                <Button className="btn btn-success" onClick={this.saveEmployee} title="Save" />
+                                <Button className="btn btn-secondary" onClick={this.cancel.bind(this)} title="Cancel" />
 
                             </form>
                         
                         {
-                            this.state.id ? <button className="btn btn-danger w-100" onClick={() => this.deleteEmployee(this.state.id)} >Delete</button> : null
+                            this.state.id ? <Button className="btn btn-danger w-100" onClick={() => this.deleteEmployee(this.state.id)} title="Delete" />: null
                         }
 
                         </div>
