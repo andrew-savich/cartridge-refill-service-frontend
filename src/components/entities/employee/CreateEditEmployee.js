@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import EmployeeService from '../../../services/EmployeeService';
 import { Button } from '../../UI/Button/Button';
+import { Input } from '../../UI/Input/Input';
 
 export default class CreateEditEmployee extends Component {
 
@@ -114,47 +115,34 @@ export default class CreateEditEmployee extends Component {
                         <div className="card-body">
 
                             <form>
-                                <div className="form-group">
-                                    <label>First Name</label>
-                                    <input
-                                        placeholder="First name"
-                                        name="firstName"
-                                        className="form-control"
-                                        value={this.state.firstName}
-                                        onChange={this.changeFirstNameHandler}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Last Name</label>
-                                    <input
-                                        placeholder="Last Name"
-                                        name="lastName"
-                                        className="form-control"
-                                        value={this.state.lastName}
-                                        onChange={this.changeLastNameHandler}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Login</label>
-                                    <input
-                                        placeholder="Login"
-                                        name="login"
-                                        className="form-control"
-                                        value={this.state.login}
-                                        onChange={this.changeLoginHandler}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Password</label>
-                                    <input
-                                        placeholder="Password"
-                                        name="password"
-                                        type="password"
-                                        className="form-control"
-                                        value={this.state.password}
-                                        onChange={this.changePasswordHandler}
-                                    />
-                                </div>
+                                <Input 
+                                    type="text"
+                                    value={this.state.firstName}
+                                    onChange={this.changeFirstNameHandler}
+                                    label="First name"
+                                />
+                                
+                                <Input 
+                                    type="text"
+                                    value={this.state.lastName}
+                                    onChange={this.changeLastNameHandler}
+                                    label="Last name"
+                                />
+
+                                <Input 
+                                    type="text"
+                                    value={this.state.login}
+                                    onChange={this.changeLoginHandler}
+                                    label="Login"
+                                />
+
+                                <Input 
+                                    type="password"
+                                    value={this.state.password}
+                                    onChange={this.changePasswordHandler}
+                                    label="Password"
+                                />
+                                
                                 <div className="form-group">
                                     <label>Position</label>
                                     
