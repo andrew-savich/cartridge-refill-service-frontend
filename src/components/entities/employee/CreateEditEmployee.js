@@ -21,7 +21,7 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 6
+                        minLength: 3
                     }
                 },
                 password: {
@@ -33,7 +33,7 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 6
+                        minLength: 3
                     }
                 },
                 firstName: {
@@ -45,7 +45,7 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 6
+                        minLength: 3
                     }
                 },
                 lastName: {
@@ -57,13 +57,14 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 6
+                        minLength: 3
                     }
                 }
             },
             
             position: '',
-            positions: []
+            positions: [],
+            isFormValid: false
         }
 
         this.saveEmployee = this.saveEmployee.bind(this);
@@ -86,13 +87,15 @@ export default class CreateEditEmployee extends Component {
 
                if (inputs[field]) {
                 inputs[field].value = employee[field];
+                inputs[field].valid = true;
                }
                
             });
 
             this.setState({
                 inputs,
-                position: employee['position']
+                position: employee['position'],
+                isFormValid: true
             });
 
         } else {
@@ -111,11 +114,11 @@ export default class CreateEditEmployee extends Component {
 
         let isValid = true;
 
-        if(validation.required){
+        if (validation.required){
             isValid = value.trim() !== '' && isValid;
         }
 
-        if(validation.minLength){  
+        if (validation.minLength){  
             isValid = value.length >= validation.minLength && isValid;
         }
 
@@ -132,8 +135,15 @@ export default class CreateEditEmployee extends Component {
 
         inputs[name] = input;
 
+        let isFormValid = true;
+
+        Object.keys(inputs).forEach(itemName =>{
+            isFormValid = inputs[itemName].valid && isFormValid;
+        })
+
         this.setState({
-            inputs
+            inputs,
+            isFormValid
         })
     
     }
@@ -218,13 +228,13 @@ export default class CreateEditEmployee extends Component {
                                 />
                                 
 
-                                <Button className="btn btn-success mx-2" onClick={this.saveEmployee} title="Save" />
+                                <Button className="btn btn-success me-2" onClick={this.saveEmployee} title="Save" disabled={!this.state.isFormValid}/>
                                 <Button className="btn btn-secondary" onClick={this.cancel.bind(this)} title="Cancel" />
 
                             </form>
                         
                         {
-                            this.state.id ? <Button className="btn btn-danger w-100" onClick={() => this.deleteEmployee(this.state.id)} title="Delete" />: null
+                            this.state.id ? <Button className="btn btn-danger w-100 mt-2" onClick={() => this.deleteEmployee(this.state.id)} title="Delete" />: null
                         }
 
                         </div>

@@ -9,7 +9,7 @@ function isInvalid({valid, touched, shouldValidate}){
 export const Input = props => {
     const inputType = props.type || "text";
     const htmlFor = `${inputType}-${Math.random()}`;
-    const classes = "form-control";
+    const classes = "form-control needs-validation";
 
     return(
         <div className="form-group my-2">
