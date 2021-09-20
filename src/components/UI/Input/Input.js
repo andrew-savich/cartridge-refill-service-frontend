@@ -2,18 +2,14 @@ import React from 'react';
 import styles from './Validation.module.css'
 
 
-function isInvalid(){
-
+function isInvalid({valid, touched, shouldValidate}){
+    return !valid && shouldValidate && touched;
 }
 
 export const Input = props => {
     const inputType = props.type || "text";
     const htmlFor = `${inputType}-${Math.random()}`;
     const classes = "form-control";
-
-    // if(isInvalid(props)){
-    //     classes += " "
-    // }
 
     return(
         <div className="form-group my-2">
@@ -26,7 +22,13 @@ export const Input = props => {
                 onChange={props.onChange}
                 placeholder={props.label}
             />
-            <span className={styles.invalid}>{props.errorMessage}</span>
+
+            {
+                isInvalid(props)
+                    ? <span className={styles.invalid}> {props.errorMessage || 'Default error message'} </span>
+                    : null
+            }
+
         </div>
     )
 }

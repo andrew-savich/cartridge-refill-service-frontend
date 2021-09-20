@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { getColumnNamesFromEntityKeys, camelCaseToNormalWords } from '../../utils/Utills';
+import { Button } from '../UI/Button/Button';
 
 
 export const Table = ({entities}) => {
@@ -29,7 +30,9 @@ export const Table = ({entities}) => {
                         entities.map(entity => 
                             <tr key={entity.id}>
                                 {Array.from(Object.keys(entity)).map((field, index) => <td key = {entity[field] + index}>{entity[field]}</td>)}
-                                <td><button onClick={ () => editEntityHandler(entity.id) } className="btn btn-primary btn-sm" >Edit</button></td>
+                                <td>
+                                    <Button className="btn btn-primary btn-sm" onClick={ () => editEntityHandler(entity.id) } title="Edit" />
+                                </td>
                             </tr>
                         )
                     }

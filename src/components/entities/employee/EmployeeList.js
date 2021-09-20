@@ -30,13 +30,13 @@ export default class EmployeeList extends Component {
         return (
             <div className="container">
                 <h2 className="text-center">Employees</h2>
-                <Button className="btn btn-primary" onClick={this.addEmployeeHandler} title="Add Employee" />
-                <div className="row">
 
+                <Button className="btn btn-primary" onClick={this.addEmployeeHandler} title="Add Employee" />
+
+                <div className="row">
                     {
                      this.state.employees.length !== 0 ? <Table entities={this.state.employees}/> : <h3>Empty</h3>
                     }
-                   
                 </div>
                 
             </div>
