@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import EmployeeService from '../../../services/EmployeeService';
 import { Button } from '../../UI/Button/Button';
 import { Input } from '../../UI/Input/Input';
+import { Select } from '../../UI/Select/Select';
 
 export default class CreateEditEmployee extends Component {
 
@@ -44,7 +45,6 @@ export default class CreateEditEmployee extends Component {
             });
         } 
             
-        console.log('got id: ', this.state.id);
         EmployeeService.getEmployeePositions().then( response => {
             this.setState({positions: response.data});
         });
@@ -120,6 +120,7 @@ export default class CreateEditEmployee extends Component {
                                     value={this.state.firstName}
                                     onChange={this.changeFirstNameHandler}
                                     label="First name"
+                                    errorMessage={'test validation'}
                                 />
                                 
                                 <Input 
@@ -142,11 +143,18 @@ export default class CreateEditEmployee extends Component {
                                     onChange={this.changePasswordHandler}
                                     label="Password"
                                 />
+
+                                <Select
+                                    label="Position"
+                                    defaultValue={this.state.currentPosition}
+                                    onChange={this.changePositionHandler}
+                                    items={this.state.positions}
+                                />
                                 
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label>Position</label>
                                     
-                                    <select className="form-select" value={this.state.currentPosition} onChange={this.changePositionHandler}  >
+                                    <select className="form-select mb-2" value={this.state.currentPosition} onChange={this.changePositionHandler}  >
                                         <option></option>
                                        {
                                            this.state.positions.map((position, index) => (
@@ -161,9 +169,9 @@ export default class CreateEditEmployee extends Component {
                                        <option >default</option>
                                     </select>
 
-                                </div>
+                                </div> */}
 
-                                <Button className="btn btn-success" onClick={this.saveEmployee} title="Save" />
+                                <Button className="btn btn-success me-2" onClick={this.saveEmployee} title="Save" />
                                 <Button className="btn btn-secondary" onClick={this.cancel.bind(this)} title="Cancel" />
 
                             </form>
