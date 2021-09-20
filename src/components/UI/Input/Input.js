@@ -16,7 +16,7 @@ export const Input = props => {
     // }
 
     return(
-        <div className="form-group mb-2">
+        <div className="form-group my-2">
             <label htmlFor={htmlFor} > {props.label} </label>
             <input
                 className={classes}

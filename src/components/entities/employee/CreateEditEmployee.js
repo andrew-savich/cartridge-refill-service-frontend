@@ -15,21 +15,20 @@ export default class CreateEditEmployee extends Component {
             password: '',
             firstName: '',
             lastName: '',
-            currentPosition: '',
+            position: '',
             positions: []
         }
 
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.changeLoginHandler = this.changeLoginHandler.bind(this);
-        this.changePasswordHandler = this.changePasswordHandler.bind(this);
-        this.changePositionHandler = this.changePositionHandler.bind(this);
         this.saveEmployee = this.saveEmployee.bind(this);
         this.deleteEmployee = this.deleteEmployee.bind(this);
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+
+        const response = await EmployeeService.getEmployeePositions();
+        this.setState({positions: response.data});
+        console.log("positions1: ", this.state.positions);
 
         if(this.state.id){
             EmployeeService.getEmployeeById(this.state.id).then( response => {
@@ -40,35 +39,31 @@ export default class CreateEditEmployee extends Component {
                     password: employee.password,
                     firstName: employee.firstName,
                     lastName: employee.lastName,
-                    currentPosition: employee.position,
+                    position: employee.position,
                 });
             });
+        }else{
+            this.setState({
+                position: this.state.positions[0]
+            })
+
+            console.log("positions2: ", this.state.positions);
         } 
-            
-        EmployeeService.getEmployeePositions().then( response => {
-            this.setState({positions: response.data});
-        });
 
     }
 
-    changeFirstNameHandler = event => {
-        this.setState({firstName: event.target.value});
-    }
+    changeField = (event, name) => {
+        const { value } = event.target;
 
-    changeLastNameHandler = event =>  {
-        this.setState({lastName: event.target.value});
-    }
-
-    changeLoginHandler = event =>  {
-        this.setState({login: event.target.value});
-    }
-
-    changePasswordHandler = event =>  {
-        this.setState({password: event.target.value});
-    }
-
-    changePositionHandler = event =>  {
-        this.setState({currentPosition: event.target.value});
+        const setValuesMap = {
+            'firstName': () => this.setState({firstName: value}),
+            'lastName': () => this.setState({lastName: value}),
+            'login': () => this.setState({login: value}),
+            'password': () => this.setState({password: value}),
+            'position': () => this.setState({position: value}),
+        };
+        
+        setValuesMap[name]();
     }
 
     saveEmployee = event => {
@@ -79,7 +74,7 @@ export default class CreateEditEmployee extends Component {
             lastName: this.state.lastName,
             login: this.state.login,
             password: this.state.password,
-            position: this.state.currentPosition
+            position: this.state.position
         }
 
         if(this.state.id){
@@ -114,11 +109,11 @@ export default class CreateEditEmployee extends Component {
                         <h3 className="text-center">{ this.state.id ? 'Edit Employee' : 'Add Employee' }</h3>
                         <div className="card-body">
 
-                            <form>
+                            <form >
                                 <Input 
                                     type="text"
                                     value={this.state.firstName}
-                                    onChange={this.changeFirstNameHandler}
+                                    onChange={(e) => this.changeField(e, 'firstName')}
                                     label="First name"
                                     errorMessage={'test validation'}
                                 />
@@ -126,52 +121,33 @@ export default class CreateEditEmployee extends Component {
                                 <Input 
                                     type="text"
                                     value={this.state.lastName}
-                                    onChange={this.changeLastNameHandler}
+                                    onChange={(e) => this.changeField(e, 'lastName')}
                                     label="Last name"
                                 />
 
                                 <Input 
                                     type="text"
                                     value={this.state.login}
-                                    onChange={this.changeLoginHandler}
+                                    onChange={(e) => this.changeField(e, 'login')}
                                     label="Login"
                                 />
 
                                 <Input 
                                     type="password"
                                     value={this.state.password}
-                                    onChange={this.changePasswordHandler}
+                                    onChange={(e) => this.changeField(e, 'password')}
                                     label="Password"
                                 />
 
                                 <Select
                                     label="Position"
-                                    defaultValue={this.state.currentPosition}
-                                    onChange={this.changePositionHandler}
+                                    defaultValue={this.state.position}
+                                    onChange={(e) => this.changeField(e, 'position')}
                                     items={this.state.positions}
                                 />
                                 
-                                {/* <div className="form-group">
-                                    <label>Position</label>
-                                    
-                                    <select className="form-select mb-2" value={this.state.currentPosition} onChange={this.changePositionHandler}  >
-                                        <option></option>
-                                       {
-                                           this.state.positions.map((position, index) => (
-                                               <option
-                                                key={index}
-                                                value={position}
-                                            >
-                                                {position}
-                                            </option>
-                                            ))
-                                       }
-                                       <option >default</option>
-                                    </select>
 
-                                </div> */}
-
-                                <Button className="btn btn-success me-2" onClick={this.saveEmployee} title="Save" />
+                                <Button className="btn btn-success mx-2" onClick={this.saveEmployee} title="Save" />
                                 <Button className="btn btn-secondary" onClick={this.cancel.bind(this)} title="Cancel" />
 
                             </form>
