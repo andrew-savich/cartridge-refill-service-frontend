@@ -7,11 +7,11 @@ export const Select = props => {
         <div className="form-group my-2">
             <label htmlFor={htmlFor}>{props.label}</label>
 
-            <select htmlFor={htmlFor} className="form-select" value={props.defaultValue} onChange={props.onChange} >
+            <select id={htmlFor} className="form-select" value={props.defaultValue} onChange={props.onChange} >
 
                 {
                     props.items.map((item, index) => (
-                        <option 
+                        <option
                             key={item + index}
                             value={item.value}
                         >
