@@ -131,12 +131,12 @@ export default class CreateEditEmployee extends Component {
 
         Object.keys(inputs).forEach(itemName => {
             isFormValid = inputs[itemName].valid && isFormValid;
-        })
+        });
 
         this.setState({
             inputs,
             isFormValid
-        })
+        });
     
     }
 
@@ -144,7 +144,7 @@ export default class CreateEditEmployee extends Component {
         this.setState({position: event.target.value});
     }
 
-    saveEmployee = event => {
+    saveEmployee = async event => {
         event.preventDefault();
 
         const employee = {
@@ -155,15 +155,25 @@ export default class CreateEditEmployee extends Component {
             position: this.state.position
         }
 
-        if(this.state.id){
+        if (this.state.id) {
             EmployeeService.updateEmployee(employee, this.state.id).then(() => {
                 this.props.history.push('/');
             });
 
-        } else{
-            EmployeeService.createEmployee(employee).then(() => {
+        } else {
+            try {
+                await EmployeeService.createEmployee(employee);
                 this.props.history.push('/');
-            });
+                
+            } catch(error) {
+                console.log(error.response.data);
+                this.setState({
+                    valid: false,
+                    errorMessage: error.response.data
+                })
+                
+            }
+            
         }
         
     }

@@ -26,6 +26,18 @@ export default class EmployeeList extends Component {
        this.props.history.push('/add');
     }
 
+    async testHandler(){
+        try{
+            const response = await EmployeeService.testException();
+            console.log('response: ', response.data);
+        } catch(error){
+            console.log(error);
+            
+        }
+        
+        
+    }
+
     render() {
         return (
             <div className="container">
@@ -38,6 +50,8 @@ export default class EmployeeList extends Component {
                      this.state.employees.length !== 0 ? <Table entities={this.state.employees}/> : <h3>Empty</h3>
                     }
                 </div>
+
+                <Button className="btn btn-primary" onClick={this.testHandler} title="test" />
                 
             </div>
         )

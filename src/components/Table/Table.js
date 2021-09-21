@@ -5,7 +5,6 @@ import { Button } from '../UI/Button/Button';
 
 
 export const Table = ({entities}) => {
-    console.log('creating table with entities: ', entities);
 
     const columnNames = getColumnNamesFromEntityKeys(entities[0]);
 
