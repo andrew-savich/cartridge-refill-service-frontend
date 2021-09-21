@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EmployeeService from '../../../services/EmployeeService';
+import { checkInput } from '../../../utils/Validation';
 import { Button } from '../../UI/Button/Button';
 import { Input } from '../../UI/Input/Input';
 import { Select } from '../../UI/Select/Select';
@@ -21,7 +22,9 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 3
+                        minLength: 5,
+                        maxLength: 30,
+                        pattern: /^[a-z0-9_-]*$/
                     }
                 },
                 password: {
@@ -33,7 +36,9 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 3
+                        minLength: 5,
+                        maxLength: 30,
+                        pattern: /^[a-zA-Z0-9]*$/
                     }
                 },
                 firstName: {
@@ -45,7 +50,9 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 3
+                        minLength: 2,
+                        maxLength: 30,
+                        pattern: /^[а-яА-Яa-zA-Z]*$/
                     }
                 },
                 lastName: {
@@ -57,7 +64,10 @@ export default class CreateEditEmployee extends Component {
                     touched: false,
                     validation: {
                         required: true,
-                        minLength: 3
+                        minLength: 2,
+                        maxLength: 30,
+                        pattern: /^[а-яА-Яa-zA-Z]*$/
+
                     }
                 }
             },
@@ -107,37 +117,19 @@ export default class CreateEditEmployee extends Component {
 
     }
 
-    validateInput(value, validation){
-        if(!validation){
-            return true;
-        }
-
-        let isValid = true;
-
-        if (validation.required){
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (validation.minLength){  
-            isValid = value.length >= validation.minLength && isValid;
-        }
-
-        return isValid;
-    }
-
     changeInputHandler = (event, name) => {
         const inputs = {...this.state.inputs};
         const input = { ...inputs[name] };
 
         input.value = event.target.value;
         input.touched = true;
-        input.valid = this.validateInput(input.value, input.validation);
+        input.valid = checkInput(input.validation, input.value);
 
         inputs[name] = input;
 
         let isFormValid = true;
 
-        Object.keys(inputs).forEach(itemName =>{
+        Object.keys(inputs).forEach(itemName => {
             isFormValid = inputs[itemName].valid && isFormValid;
         })
 
@@ -219,14 +211,12 @@ export default class CreateEditEmployee extends Component {
 
                                 { this.renderInputs() }
 
-
                                 <Select
                                     label="Position"
                                     defaultValue={this.state.position}
                                     onChange={(e) => this.changeSelectHandler(e)}
                                     items={this.state.positions}
                                 />
-                                
 
                                 <Button className="btn btn-success me-2" onClick={this.saveEmployee} title="Save" disabled={!this.state.isFormValid}/>
                                 <Button className="btn btn-secondary" onClick={this.cancel.bind(this)} title="Cancel" />
