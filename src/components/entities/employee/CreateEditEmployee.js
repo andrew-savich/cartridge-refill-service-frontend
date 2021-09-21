@@ -166,12 +166,7 @@ export default class CreateEditEmployee extends Component {
                 this.props.history.push('/');
                 
             } catch(error) {
-                console.log(error.response.data);
-                this.setState({
-                    valid: false,
-                    errorMessage: error.response.data
-                })
-                
+                alert(error.response.data);
             }
             
         }
