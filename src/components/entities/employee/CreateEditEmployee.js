@@ -156,15 +156,17 @@ export default class CreateEditEmployee extends Component {
         }
 
         if (this.state.id) {
-            EmployeeService.updateEmployee(employee, this.state.id).then(() => {
+            try {
+                await EmployeeService.updateEmployee(employee, this.state.id);
                 this.props.history.push('/');
-            });
+            } catch (error){
+                alert(error.response.data);
+            }
 
         } else {
             try {
                 await EmployeeService.createEmployee(employee);
                 this.props.history.push('/');
-                
             } catch(error) {
                 alert(error.response.data);
             }
