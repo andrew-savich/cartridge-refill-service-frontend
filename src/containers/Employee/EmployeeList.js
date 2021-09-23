@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import EmployeeService from '../../../services/EmployeeService';
-import { Table } from '../../Table/Table';
-import { Button } from '../../UI/Button/Button';
+import EmployeeService from '../../services/EmployeeService';
+import { Table } from '../../components/Table/Table';
+import { Button } from '../../components/Button/Button';
 
 export default class EmployeeList extends Component {
     constructor(props){
@@ -26,18 +26,6 @@ export default class EmployeeList extends Component {
        this.props.history.push('/add');
     }
 
-    async testHandler(){
-        try{
-            const response = await EmployeeService.testException();
-            console.log('response: ', response.data);
-        } catch(error){
-            console.log(error);
-            
-        }
-        
-        
-    }
-
     render() {
         return (
             <div className="container">
@@ -51,8 +39,6 @@ export default class EmployeeList extends Component {
                     }
                 </div>
 
-                <Button className="btn btn-primary" onClick={this.testHandler} title="test" />
-                
             </div>
         )
     }

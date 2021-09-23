@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import EmployeeService from '../../../services/EmployeeService';
-import { checkInput } from '../../../utils/Validation';
-import { Button } from '../../UI/Button/Button';
-import { Input } from '../../UI/Input/Input';
-import { Select } from '../../UI/Select/Select';
+import EmployeeService from '../../services/EmployeeService';
+import { checkInput } from '../../utils/Validation';
+import { Button } from '../../components/Button/Button';
+import { Input } from '../../components/Input/Input';
+import { Select } from '../../components/Select/Select';
 
 export default class CreateEditEmployee extends Component {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router';
-import CreateEditEmployee from './components/entities/employee/CreateEditEmployee';
-import EmployeeList from './components/entities/employee/EmployeeList';
+import CreateEditEmployee from './containers/Employee/CreateEditEmployee';
+import EmployeeList from './containers/Employee/EmployeeList';
 
 function App() {
   return (

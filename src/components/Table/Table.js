@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { getColumnNamesFromEntityKeys, camelCaseToNormalWords } from '../../utils/Utills';
-import { Button } from '../UI/Button/Button';
+import { Button } from '../Button/Button';
 
 
 export const Table = ({entities}) => {
