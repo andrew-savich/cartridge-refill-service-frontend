@@ -1,17 +1,19 @@
 import React from 'react'
 import { Route, Switch } from 'react-router';
+import { Navbar } from './components/Navbar/Navbar';
 import CreateEditEmployee from './containers/Employee/CreateEditEmployee';
 import EmployeeList from './containers/Employee/EmployeeList';
 
 function App() {
   return (
     <div>
-      <Switch>
-        <Route path="/" exact component={EmployeeList}></Route>
-        <Route path="/employees" component={EmployeeList}></Route>
-        <Route path="/add" component={CreateEditEmployee}></Route>
-        <Route path="/edit/:id" component={CreateEditEmployee}></Route>
-      </Switch>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={EmployeeList}></Route>
+          <Route path="/employees" component={EmployeeList}></Route>
+          <Route path="/add-employee" component={CreateEditEmployee}></Route>
+          <Route path="/edit-employee/:id" component={CreateEditEmployee}></Route>
+        </Switch>
     </div>
   );
 }

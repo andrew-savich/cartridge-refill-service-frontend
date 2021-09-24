@@ -11,8 +11,7 @@ export const Table = ({entities}) => {
     const history = useHistory();
 
     const editEntityHandler = id => {
-        console.log('Edit for entity id: ', id);
-        history.push(`/edit/${id}`);
+        history.push(`/edit-employee/${id}`);
     }
 
     return (
