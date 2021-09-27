@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
     const [isShow, setIsShow] = useState(false);
-    const ref = useRef(null);
+    const refDropdown = useRef(null);
 
     useEffect(() => {
         const checkIfClickedOutside = e => {
-            if(isShow && ref.current && !ref.current.contains(e.target)){
+            if(isShow && refDropdown.current && !refDropdown.current.contains(e.target)){
                 setIsShow(false);
             }
         }
@@ -38,7 +38,7 @@ export const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link dropdown-toggle" onClick={() => {setIsShow(!isShow)}} to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cartridges</NavLink>
-                                <ul ref={ref} className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } aria-labelledby="navbarDropdownMenuLink">
+                                <ul ref={refDropdown} className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } aria-labelledby="navbarDropdownMenuLink">
                                     <li><NavLink className="dropdown-item" to="/groups" onClick={() => {setIsShow(false)}}>Groups</NavLink></li>
                                     <li><NavLink className="dropdown-item" to="/models" onClick={() => {setIsShow(false)}}>Models</NavLink></li>
                                 </ul>
