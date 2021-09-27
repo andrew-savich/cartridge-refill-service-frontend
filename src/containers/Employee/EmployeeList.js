@@ -14,7 +14,7 @@ export default class EmployeeList extends Component {
         this.addEmployeeHandler = this.addEmployeeHandler.bind(this);
     }
 
-    async componentDidMount(){
+    async componentDidMount() {
         const respponse = await EmployeeService.getEmployees();
         this.setState({
             employees: respponse.data

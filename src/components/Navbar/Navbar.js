@@ -7,7 +7,7 @@ export const Navbar = () => {
 
     useEffect(() => {
         const checkIfClickedOutside = e => {
-            if(isShow && refDropdown.current && !refDropdown.current.contains(e.target)){
+            if (isShow && refDropdown.current && !refDropdown.current.contains(e.target)) {
                 setIsShow(false);
             }
         }
