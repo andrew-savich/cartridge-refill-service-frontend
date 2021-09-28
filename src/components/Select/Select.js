@@ -10,7 +10,7 @@ export const Select = props => {
             <select id={htmlFor} className="form-select" value={props.defaultValue} onChange={props.onChange} >
 
                 {
-                    props.items.map((item, index) => (
+                    props.items && props.items.map((item, index) => (
                         <option
                             key={item + index}
                             value={item.value}

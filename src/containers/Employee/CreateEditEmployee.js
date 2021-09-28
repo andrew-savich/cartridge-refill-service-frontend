@@ -1,124 +1,112 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import EmployeeService from '../../services/EmployeeService';
 import { checkInput } from '../../utils/Validation';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 import { Select } from '../../components/Select/Select';
 
-export default class CreateEditEmployee extends Component {
 
-    constructor(props){
-        super(props);
-        
-        this.state={
-            id: this.props.match.params.id,
-            inputs: {
-                login: {
-                    value: '',
-                    type: 'text',
-                    label: 'Login',
-                    errorMessage: 'Type the correct login',
-                    valid: false,
-                    touched: false,
-                    validation: {
-                        required: true,
-                        minLength: 5,
-                        maxLength: 30,
-                        pattern: /^[a-z0-9_-]*$/
-                    }
-                },
-                password: {
-                    value: '',
-                    type: 'password',
-                    label: 'Password',
-                    errorMessage: 'Type the correct password',
-                    valid: false,
-                    touched: false,
-                    validation: {
-                        required: true,
-                        minLength: 5,
-                        maxLength: 30,
-                        pattern: /^[a-zA-Z0-9]*$/
-                    }
-                },
-                firstName: {
-                    value: '',
-                    type: 'text',
-                    label: 'First Name',
-                    errorMessage: 'Type the correct first name',
-                    valid: false,
-                    touched: false,
-                    validation: {
-                        required: true,
-                        minLength: 2,
-                        maxLength: 30,
-                        pattern: /^[а-яА-Яa-zA-Z]*$/
-                    }
-                },
-                lastName: {
-                    value: '',
-                    type: 'text',
-                    label: 'Last Name',
-                    errorMessage: 'Type the correct last name',
-                    valid: false,
-                    touched: false,
-                    validation: {
-                        required: true,
-                        minLength: 2,
-                        maxLength: 30,
-                        pattern: /^[а-яА-Яa-zA-Z]*$/
+const CreateEditEmployee  = (props) => {
+    const [employeeId] = useState(props.match.params.id);
 
-                    }
-                }
-            },
-            
-            position: '',
-            positions: [],
-            isFormValid: false
+    const [currentPosition, setCurrentPosition] = useState();
+    const [positions, setPositions] = useState([]);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [form, setForm] = useState({
+        login: {
+            value: '',
+            type: 'text',
+            label: 'Login',
+            errorMessage: 'Type the correct login',
+            valid: false,
+            touched: false,
+            validation: {
+                required: true,
+                minLength: 5,
+                maxLength: 30,
+                pattern: /^[a-z0-9_-]*$/
+            }
+        },
+        password: {
+            value: '',
+            type: 'password',
+            label: 'Password',
+            errorMessage: 'Type the correct password',
+            valid: false,
+            touched: false,
+            validation: {
+                required: true,
+                minLength: 5,
+                maxLength: 30,
+                pattern: /^[a-zA-Z0-9]*$/
+            }
+        },
+        firstName: {
+            value: '',
+            type: 'text',
+            label: 'First Name',
+            errorMessage: 'Type the correct first name',
+            valid: false,
+            touched: false,
+            validation: {
+                required: true,
+                minLength: 2,
+                maxLength: 30,
+                pattern: /^[а-яА-Яa-zA-Z]*$/
+            }
+        },
+        lastName: {
+            value: '',
+            type: 'text',
+            label: 'Last Name',
+            errorMessage: 'Type the correct last name',
+            valid: false,
+            touched: false,
+            validation: {
+                required: true,
+                minLength: 2,
+                maxLength: 30,
+                pattern: /^[а-яА-Яa-zA-Z]*$/
+
+            }
         }
+    });
 
-        this.saveEmployee = this.saveEmployee.bind(this);
-        this.deleteEmployee = this.deleteEmployee.bind(this);
+    useEffect(() => {
+        const init = async () => {
 
-    }
+            const response = await EmployeeService.getEmployeePositions();
+            setPositions(response.data);
+            setCurrentPosition(response.data[0]);
 
-    async componentDidMount() {
+            if (employeeId) {
+                const response = await EmployeeService.getEmployeeById(employeeId);
+                let employee = response.data;
 
-        const response = await EmployeeService.getEmployeePositions();
-        this.setState({positions: response.data});
+                const inputs = { ...form };
 
-        if (this.state.id) {
-            const response = await EmployeeService.getEmployeeById(this.state.id);
-            let employee = response.data;
+                Array.from(Object.keys(employee)).forEach((field) => {
 
-            const inputs = { ...this.state.inputs };
+                    if (inputs[field]) {
+                        inputs[field].value = employee[field];
+                        inputs[field].valid = true;
+                    }
+                
+                });
 
-            Array.from(Object.keys(employee)).forEach((field, index) => {
+                setCurrentPosition(employee.position);
+                setForm(inputs);
+                setIsFormValid(true);
 
-               if (inputs[field]) {
-                inputs[field].value = employee[field];
-                inputs[field].valid = true;
-               }
-               
-            });
+            }
+        };            
+       
+        init();
+    }, []);
+    
 
-            this.setState({
-                inputs,
-                position: employee['position'],
-                isFormValid: true
-            });
-
-        } else {
-            this.setState({
-                position: this.state.positions[0],
-
-            })
-        }
-
-    }
-
-    changeInputHandler = (event, name) => {
-        const inputs = {...this.state.inputs};
+    const changeInputHandler = (event, name) => {
+        const inputs = {...form};
         const input = { ...inputs[name] };
 
         input.value = event.target.value;
@@ -133,32 +121,30 @@ export default class CreateEditEmployee extends Component {
             isFormValid = inputs[itemName].valid && isFormValid;
         });
 
-        this.setState({
-            inputs,
-            isFormValid
-        });
+        setForm(inputs);
+        setIsFormValid (isFormValid);
     
     }
 
-    changeSelectHandler = event => {
-        this.setState({position: event.target.value});
+    const changeSelectHandler = event => {
+        setCurrentPosition(event.target.value);
     }
 
-    saveEmployee = async event => {
+    const saveEmployee = async event => {
         event.preventDefault();
 
         const employee = {
-            firstName: this.state.inputs.firstName.value,
-            lastName: this.state.inputs.lastName.value,
-            login: this.state.inputs.login.value,
-            password: this.state.inputs.password.value,
-            position: this.state.position
+            firstName: form.firstName.value,
+            lastName: form.lastName.value,
+            login: form.login.value,
+            password: form.password.value,
+            position: currentPosition
         }
 
-        if (this.state.id) {
+        if (employeeId) {
             try {
-                await EmployeeService.updateEmployee(employee, this.state.id);
-                this.props.history.push('/');
+                await EmployeeService.updateEmployee(employee, employeeId);
+                props.history.push('/');
             } catch (error){
                 alert(error.response.data);
             }
@@ -166,7 +152,7 @@ export default class CreateEditEmployee extends Component {
         } else {
             try {
                 await EmployeeService.createEmployee(employee);
-                this.props.history.push('/');
+                props.history.push('/');
             } catch(error) {
                 alert(error.response.data);
             }
@@ -175,19 +161,19 @@ export default class CreateEditEmployee extends Component {
         
     }
 
-    deleteEmployee = id => {
+    const deleteEmployee = id => {
         EmployeeService.deleteEmployee(id).then(() => {
-            this.props.history.push('/');
+            props.history.push('/');
         });
     }
 
-    cancel = event => {
-        this.props.history.push('/');
+    const cancel = () => {
+        props.history.push('/');
     }
 
-    renderInputs(){
-        return Object.keys(this.state.inputs).map((inputName, index) => {
-            const input = this.state.inputs[inputName];
+    const renderInputs = () => {
+        return Object.keys(form).map((inputName, index) => {
+            const input = form[inputName];
             return(
                 <Input 
                     key={inputName + index}
@@ -198,47 +184,47 @@ export default class CreateEditEmployee extends Component {
                     label={input.label}
                     shouldValidate={!!input.validation}
                     errorMessage={input.errorMessage}
-                    onChange={(e) => this.changeInputHandler(e, inputName)}
+                    onChange={(e) => changeInputHandler(e, inputName)}
                 />
 
             )
         });
     }
 
-    render() {
-        return (
-            <div>
-            <div className="container">
-                <div className="row">
-                    <div className="card col-md-6 offset-md-3">
-                        <h3 className="text-center">{ this.state.id ? 'Edit Employee' : 'Add Employee' }</h3>
-                        <div className="card-body">
+    return (
+        <div>
+        <div className="container">
+            <div className="row">
+                <div className="card col-md-6 offset-md-3">
+                    <h3 className="text-center">{ employeeId ? 'Edit Employee' : 'Add Employee' }</h3>
+                    <div className="card-body">
 
-                            <form >
+                        <form >
 
-                                { this.renderInputs() }
+                            { renderInputs() }
+                            
+                            <Select
+                                label="Position"
+                                defaultValue={currentPosition}
+                                onChange={(e) => changeSelectHandler(e)}
+                                items={positions}
+                            />
 
-                                <Select
-                                    label="Position"
-                                    defaultValue={this.state.position}
-                                    onChange={(e) => this.changeSelectHandler(e)}
-                                    items={this.state.positions}
-                                />
+                            <Button className="btn btn-success me-2" onClick={saveEmployee} title="Save" disabled={!isFormValid}/>
+                            <Button className="btn btn-secondary" onClick={cancel} title="Cancel" />
 
-                                <Button className="btn btn-success me-2" onClick={this.saveEmployee} title="Save" disabled={!this.state.isFormValid}/>
-                                <Button className="btn btn-secondary" onClick={this.cancel.bind(this)} title="Cancel" />
+                        </form>
+                    
+                    {
+                        employeeId ? <Button className="btn btn-danger w-100 mt-2" onClick={() => deleteEmployee(employeeId)} title="Delete" />: null
+                    }
 
-                            </form>
-                        
-                        {
-                            this.state.id ? <Button className="btn btn-danger w-100 mt-2" onClick={() => this.deleteEmployee(this.state.id)} title="Delete" />: null
-                        }
-
-                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-        )
-    }
+        </div>
+        </div>
+    )    
 }
+
+export default CreateEditEmployee

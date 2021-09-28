@@ -29,11 +29,6 @@ class EmployeeService {
         return axios.get(EMPLOYEE_API_BASE_URL + '/' + employeeId);
     }
 
-    testException(){
-        return axios.get(EMPLOYEE_API_BASE_URL + '/test');
-    }
-
-
 }
 
 export default new EmployeeService();
