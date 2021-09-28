@@ -15,7 +15,7 @@ export const Navbar = () => {
         document.addEventListener("mousedown", checkIfClickedOutside);
 
         return () => {
-            document.removeEventListener("mousedown", checkIfClickedOutside)
+            document.removeEventListener("mousedown", checkIfClickedOutside);
         }
         
     }, [isShow]);
@@ -36,9 +36,9 @@ export const Navbar = () => {
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to="/refills">Refills</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link dropdown-toggle" onClick={() => setIsShow(oldState => !oldState)} to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cartridges</NavLink>
-                                <ul ref={refDropdown} className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } aria-labelledby="navbarDropdownMenuLink">
+                            <li ref={refDropdown} className="nav-item">
+                                <NavLink className="nav-link dropdown-toggle" onClick={() => setIsShow(!isShow)} to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cartridges</NavLink>
+                                <ul  className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } aria-labelledby="navbarDropdownMenuLink">
                                     <li><NavLink className="dropdown-item" to="/groups" onClick={() => {setIsShow(false)}}>Groups</NavLink></li>
                                     <li><NavLink className="dropdown-item" to="/models" onClick={() => {setIsShow(false)}}>Models</NavLink></li>
                                 </ul>
