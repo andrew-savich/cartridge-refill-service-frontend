@@ -8,7 +8,6 @@ import { Select } from '../../components/Select/Select';
 
 const CreateEditEmployee  = (props) => {
     const [employeeId] = useState(props.match.params.id);
-
     const [currentPosition, setCurrentPosition] = useState();
     const [positions, setPositions] = useState([]);
     const [isFormValid, setIsFormValid] = useState(false);
@@ -97,7 +96,6 @@ const CreateEditEmployee  = (props) => {
                 setCurrentPosition(employee.position);
                 setForm(inputs);
                 setIsFormValid(true);
-
             }
         };            
        
@@ -193,36 +191,34 @@ const CreateEditEmployee  = (props) => {
 
     return (
         <div>
-        <div className="container">
-            <div className="row">
-                <div className="card col-md-6 offset-md-3">
-                    <h3 className="text-center">{ employeeId ? 'Edit Employee' : 'Add Employee' }</h3>
-                    <div className="card-body">
+            <div className="container">
+                <div className="row">
+                    <div className="card col-md-6 offset-md-3">
+                        <h3 className="text-center">{ employeeId ? 'Edit Employee' : 'Add Employee' }</h3>
+                        <div className="card-body">
 
-                        <form >
+                            <form >
 
-                            { renderInputs() }
-                            
-                            <Select
-                                label="Position"
-                                defaultValue={currentPosition}
-                                onChange={(e) => changeSelectHandler(e)}
-                                items={positions}
-                            />
+                                { renderInputs() }
+                                
+                                <Select
+                                    label="Position"
+                                    defaultValue={currentPosition}
+                                    onChange={(e) => changeSelectHandler(e)}
+                                    items={positions}
+                                />
 
-                            <Button className="btn btn-success me-2" onClick={saveEmployee} title="Save" disabled={!isFormValid}/>
-                            <Button className="btn btn-secondary" onClick={cancel} title="Cancel" />
+                                <Button className="btn btn-success me-2" onClick={saveEmployee} title="Save" disabled={!isFormValid}/>
+                                <Button className="btn btn-secondary" onClick={cancel} title="Cancel" />
 
-                        </form>
-                    
-                    {
-                        employeeId ? <Button className="btn btn-danger w-100 mt-2" onClick={() => deleteEmployee(employeeId)} title="Delete" />: null
-                    }
+                            </form>
+                        
+                            { employeeId ? <Button className="btn btn-danger w-100 mt-2" onClick={() => deleteEmployee(employeeId)} title="Delete" />: null }
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     )    
 }
