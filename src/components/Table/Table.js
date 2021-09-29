@@ -4,14 +4,14 @@ import { getColumnNamesFromEntityKeys, camelCaseToNormalWords } from '../../util
 import { Button } from '../Button/Button';
 
 
-export const Table = ({entities}) => {
+export const Table = (props) => {
 
-    const columnNames = getColumnNamesFromEntityKeys(entities[0]);
+    const columnNames = getColumnNamesFromEntityKeys(props.entities[0]);
 
     const history = useHistory();
 
     const editEntityHandler = id => {
-        history.push(`/edit-employee/${id}`);
+        history.push(`${props.editEntityPath}/${id}`);
     }
 
     return (
@@ -25,7 +25,7 @@ export const Table = ({entities}) => {
                 </thead>
                 <tbody>
                     {
-                        entities.map(entity => 
+                        props.entities.map(entity => 
                             <tr key={entity.id}>
                                 {Array.from(Object.keys(entity)).map((field, index) => <td key = {entity[field] + index}>{entity[field]}</td>)}
                                 <td>

@@ -18,7 +18,7 @@ import { Button } from '../../components/Button/Button';
 
     const addEmployeeHandler = () => {
        props.history.push('/add-employee');
-    }
+    };
 
    
     return (
@@ -29,7 +29,7 @@ import { Button } from '../../components/Button/Button';
 
             <div className="row">
                 {
-                    employees.length !== 0 ? <Table entities={employees}/> : <h3>Empty</h3>
+                    employees.length !== 0 ? <Table entities={employees} editEntityPath="/edit-employee"/> : <h3>Empty</h3>
                 }
             </div>
 
