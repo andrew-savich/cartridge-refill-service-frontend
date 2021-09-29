@@ -142,7 +142,7 @@ const CreateEditEmployee  = (props) => {
         if (employeeId) {
             try {
                 await EmployeeService.updateEmployee(employee, employeeId);
-                props.history.push('/');
+                props.history.push('/employees');
             } catch (error){
                 alert(error.response.data);
             }
@@ -150,7 +150,7 @@ const CreateEditEmployee  = (props) => {
         } else {
             try {
                 await EmployeeService.createEmployee(employee);
-                props.history.push('/');
+                props.history.push('/employees');
             } catch(error) {
                 alert(error.response.data);
             }
@@ -166,7 +166,7 @@ const CreateEditEmployee  = (props) => {
     }
 
     const cancel = () => {
-        props.history.push('/');
+        props.history.push('/employees');
     }
 
     const renderInputs = () => {
