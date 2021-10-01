@@ -28,7 +28,7 @@ export const Navbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     
-                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    {/* <div className="collapse navbar-collapse" id="navbarNavDropdown"> */}
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
@@ -50,7 +50,7 @@ export const Navbar = () => {
                                 <NavLink className="nav-link active" aria-current="page" to="/employees">Employees</NavLink>
                             </li>
                         </ul>
-                    </div>
+                    {/* </div> */}
 
                 </div>
             </nav>

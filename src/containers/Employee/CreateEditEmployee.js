@@ -161,7 +161,7 @@ const CreateEditEmployee  = (props) => {
 
     const deleteEmployee = id => {
         EmployeeService.deleteEmployee(id).then(() => {
-            props.history.push('/');
+            props.history.push('/employees');
         });
     }
 

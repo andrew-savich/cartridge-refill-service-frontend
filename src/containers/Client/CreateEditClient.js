@@ -124,20 +124,31 @@ const CreateEditClient = props => {
         };
 
         if (clientId){
-            await ClientService.updateClient(client, clientId);
+            try{
+                await ClientService.updateClient(client, clientId);
+                props.history.push('/clients');
+            } catch(error){
+                alert(error.response.data);
+            }
         } else {
-            await ClientService.createClient(client);
-        }
-
-        props.history.push('/clients');
+            try{
+                await ClientService.createClient(client);
+                props.history.push('/clients');
+            } catch(error){
+                alert(error.response.data);
+            }
+        } 
+        
     };
 
     const cancel = () => {
         props.history.push('/clients');
     };
 
-    const deleteClient = () => {
-
+    const deleteClient = id => {
+        ClientService.deleteClient(id).then(() => {
+            props.history.push('/clients');
+        });
     };
 
     return (

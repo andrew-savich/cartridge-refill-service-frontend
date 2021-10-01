@@ -8,7 +8,7 @@ class ClientService {
     };
 
     getClientById(clientId){
-        return axios.get(CLIENT_API_BASE_URL + '/' + clientId);
+        return axios.get(CLIENT_API_BASE_URL + '/get/' + clientId);
     };
 
     createClient(client){
@@ -17,8 +17,12 @@ class ClientService {
 
 
     updateClient(client, clientId){
-        return axios.put(CLIENT_API_BASE_URL + '/' + clientId, client);
+        return axios.put(CLIENT_API_BASE_URL + '/update/' + clientId, client);
     };
+
+    deleteClient(clientId){
+        return axios.delete(CLIENT_API_BASE_URL + '/delete/' + clientId);
+    }
 }
 
 export default new ClientService();
