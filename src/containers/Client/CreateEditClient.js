@@ -42,7 +42,7 @@ const CreateEditClient = props => {
             valid: true,
             touched: false,
             validation: {
-                required: true,
+                required: false,
                 maxLength: 400
             }
         }

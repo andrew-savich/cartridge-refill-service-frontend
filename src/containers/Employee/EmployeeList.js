@@ -17,6 +17,7 @@ import { Button } from '../../components/Button/Button';
 
 
     const addEmployeeHandler = () => {
+        console.log(props);
        props.history.push('/add-employee');
     };
 

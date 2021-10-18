@@ -24,30 +24,30 @@ export const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">Bajter</NavLink>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler" type="button" >
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     
                     {/* <div className="collapse navbar-collapse" id="navbarNavDropdown"> */}
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+                                <NavLink className="nav-link active" to="/">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/refills">Refills</NavLink>
+                                <NavLink className="nav-link active" to="/refills">Refills</NavLink>
                             </li>
                             <li ref={refDropdown} className="nav-item">
-                                <NavLink className="nav-link dropdown-toggle" onClick={() => setIsShow(!isShow)} to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cartridges</NavLink>
-                                <ul  className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } aria-labelledby="navbarDropdownMenuLink">
+                                <NavLink className="nav-link dropdown-toggle" onClick={() => setIsShow(!isShow)} to="#" id="navbarDropdownMenuLink" role="button" >Cartridges</NavLink>
+                                <ul  className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } >
                                     <li><NavLink className="dropdown-item" to="/groups" onClick={() => {setIsShow(false)}}>Groups</NavLink></li>
                                     <li><NavLink className="dropdown-item" to="/models" onClick={() => {setIsShow(false)}}>Models</NavLink></li>
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/clients">Clients</NavLink>
+                                <NavLink className="nav-link active" to="/clients">Clients</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link active" aria-current="page" to="/employees">Employees</NavLink>
+                                <NavLink className="nav-link active" to="/employees">Employees</NavLink>
                             </li>
                         </ul>
                     {/* </div> */}

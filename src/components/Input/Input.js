@@ -6,6 +6,7 @@ function isInvalid({valid, touched, shouldValidate}){
 }
 
 export const Input = props => {
+    console.log(props);
     const inputType = props.type || "text";
     const htmlFor = `${inputType}-${Math.random()}`;
     let classes = "form-control ";
