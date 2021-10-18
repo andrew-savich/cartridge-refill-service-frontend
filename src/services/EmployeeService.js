@@ -8,10 +8,6 @@ class EmployeeService {
         return axios.get(EMPLOYEE_API_BASE_URL + '/all');
     }
 
-    getEmployee() {
-        return axios.get(EMPLOYEE_API_BASE_URL + '/one');
-    }
-
     getEmployeePositions(){
         return axios.get(EMPLOYEE_API_BASE_URL + '/positions');
     }

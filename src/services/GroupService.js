@@ -15,7 +15,6 @@ class GroupService {
         return axios.post(GROUP_API_BASE_URL + '/create', group);
     };
 
-
     updateGroup(group, groupId){
         return axios.put(GROUP_API_BASE_URL + '/update/' + groupId, group);
     };

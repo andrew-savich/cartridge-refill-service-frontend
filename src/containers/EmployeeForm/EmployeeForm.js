@@ -6,7 +6,7 @@ import { Input } from '../../components/Input/Input';
 import { Select } from '../../components/Select/Select';
 
 
-const CreateEditEmployee  = (props) => {
+const EmployeeForm  = (props) => {
     const [employeeId] = useState(props.match.params.id);
     const [currentPosition, setCurrentPosition] = useState();
     const [positions, setPositions] = useState([]);
@@ -223,4 +223,4 @@ const CreateEditEmployee  = (props) => {
     )    
 }
 
-export default CreateEditEmployee
+export default EmployeeForm

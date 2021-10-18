@@ -4,7 +4,7 @@ import ClientService from '../../services/ClientService';
 import { checkInput } from '../../utils/Validation';
 import { Button } from '../../components/Button/Button';
 
-const CreateEditClient = props => {
+const ClientForm = props => {
     const [clientId] = useState(props.match.params.id);
     const [isFormValid, setIsFormValid] = useState(false);
     
@@ -176,4 +176,4 @@ const CreateEditClient = props => {
     )
 }
 
-export default CreateEditClient;
+export default ClientForm;
