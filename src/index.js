@@ -4,22 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux'
-import rootReducer from './redux/rootReducer'
 import {BrowserRouter as Router } from 'react-router-dom';
 
-const store = createStore(rootReducer);
 
 const app = (
   
-    <Provider store={store}>
       <Router>
         <React.StrictMode>
           <App />
         </React.StrictMode>
       </Router>
-    </Provider>
  
 );
 

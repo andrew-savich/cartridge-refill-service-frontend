@@ -21,13 +21,19 @@ export const Table = (props) => {
                 <thead>
                     <tr>
                         {columnNames.map((column, index) => <th key={column + index}>{camelCaseToNormalWords(column)}</th>)}
+                        <th>Action</th>
                     </tr>
+                    
                 </thead>
                 <tbody>
-                    {
+                    {   
                         props.entities.map(entity => 
                             <tr key={entity.id}>
-                                {Array.from(Object.keys(entity)).map((field, index) => <td key = {Math.random() + index}>{entity[field]}</td>)}
+                                {Array.from(Object.keys(entity)).map((field, index) => 
+                                   
+                                        <td key = {Math.random() + index}>{ typeof entity[field] !== "object" ? entity[field] : entity[field].title}</td>
+                                        
+                                    )}
                                 <td>
                                     <Button className="btn btn-primary btn-sm" onClick={ () => editEntityHandler(entity.id) } title="Edit" />
                                 </td>

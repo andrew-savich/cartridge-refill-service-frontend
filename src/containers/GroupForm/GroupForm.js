@@ -59,7 +59,7 @@ const GroupForm = props => {
         };
 
         init();
-    }, []);
+    }, [props]);
 
 
     const renderInputs = () => {

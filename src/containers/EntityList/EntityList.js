@@ -12,6 +12,7 @@ const EntityList = props => {
     useEffect(() => {
         const init = async () => {
             const response = await props.getEntities();
+
             setEntities(response.data);
         };
         

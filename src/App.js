@@ -5,9 +5,11 @@ import ClientForm from './containers/ClientForm/ClientForm';
 import EmployeeForm from './containers/EmployeeForm/EmployeeForm';
 import EntityList from './containers/EntityList/EntityList';
 import GroupForm from './containers/GroupForm/GroupForm';
+import ModelForm from './containers/ModelForm/ModelForm';
 import ClientService from './services/ClientService';
 import EmployeeService from './services/EmployeeService';
 import GroupService from './services/GroupService';
+import ModelService from './services/ModelService';
 
 function App() {
   return (
@@ -26,6 +28,10 @@ function App() {
           <Route path="/groups" exact render={() => <EntityList entityName="Group" getEntities={GroupService.getGroups} /> } ></Route>
           <Route path="/groups/add" component={GroupForm} ></Route>
           <Route path="/groups/edit/:id" component={GroupForm} ></Route>
+
+          <Route path="/models" exact render={() => <EntityList entityName="Model" getEntities={ModelService.getModels} /> } ></Route>
+          <Route path="/models/add" component={ModelForm} ></Route>
+          <Route path="/models/edit/:id" component={ModelForm} ></Route>
         </Switch>
     </div>
   );
