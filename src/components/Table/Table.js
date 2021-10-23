@@ -31,7 +31,7 @@ export const Table = (props) => {
                             <tr key={entity.id}>
                                 {Array.from(Object.keys(entity)).map((field, index) => 
                                    
-                                        <td key = {Math.random() + index}>{ typeof entity[field] !== "object" ? entity[field] : entity[field].title}</td>
+                                        <td key = {Math.random() + index}>{entity[field]}</td>
                                         
                                     )}
                                 <td>

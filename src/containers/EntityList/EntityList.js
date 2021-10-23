@@ -13,7 +13,28 @@ const EntityList = props => {
         const init = async () => {
             const response = await props.getEntities();
 
-            setEntities(response.data);
+            if(props.specialFields){
+                const currentState = [];
+
+                response.data.forEach(responsedObject => {
+                    const stateObject = {};
+                    Array.from(Object.keys(responsedObject)).map(key => {
+                        if(key in props.specialFields){
+                            stateObject[key] = responsedObject[key][props.specialFields[key]];
+                            
+                        } else {
+                            stateObject[key] = responsedObject[key];
+                        }
+                    });
+                    currentState.push(stateObject);
+                });
+                
+                setEntities(currentState);
+
+            } else{
+                setEntities(response.data);
+            }
+            
         };
         
         init();

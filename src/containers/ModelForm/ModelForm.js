@@ -103,7 +103,9 @@ const ModelForm = props => {
                 });
 
                 setCurrentColor(model.color);
-                setCurrentType(model.type)
+                setCurrentType(model.type);
+                setCurrentGroup(model.group);
+                setCurrentGroupSelect(model.group.title);
                 setForm(inputs);
                 setIsFormValid(true);
             }

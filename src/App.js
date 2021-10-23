@@ -29,7 +29,7 @@ function App() {
           <Route path="/groups/add" component={GroupForm} ></Route>
           <Route path="/groups/edit/:id" component={GroupForm} ></Route>
 
-          <Route path="/models" exact render={() => <EntityList entityName="Model" getEntities={ModelService.getModels} /> } ></Route>
+          <Route path="/models" exact render={() => <EntityList entityName="Model" getEntities={ModelService.getModels} specialFields={{group: "title"}}/> } ></Route>
           <Route path="/models/add" component={ModelForm} ></Route>
           <Route path="/models/edit/:id" component={ModelForm} ></Route>
         </Switch>
