@@ -18,7 +18,7 @@ const EntityList = props => {
 
                 response.data.forEach(responsedObject => {
                     const stateObject = {};
-                    Array.from(Object.keys(responsedObject)).map(key => {
+                    Array.from(Object.keys(responsedObject)).forEach(key => {
                         if(key in props.specialFields){
                             stateObject[key] = responsedObject[key][props.specialFields[key]];
                             
