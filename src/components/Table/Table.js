@@ -4,7 +4,7 @@ import { getColumnNamesFromEntityKeys, camelCaseToNormalWords } from '../../util
 import { Button } from '../Button/Button';
 
 
-export const Table = (props) => {
+const Table = (props) => {
 
     const columnNames = getColumnNamesFromEntityKeys(props.entities[0]);
 
@@ -47,3 +47,5 @@ export const Table = (props) => {
         </div>
     );
 }
+
+export default Table;

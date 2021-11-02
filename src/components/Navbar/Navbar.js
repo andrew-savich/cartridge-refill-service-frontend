@@ -37,8 +37,9 @@ export const Navbar = () => {
                                 <NavLink className="nav-link active" to="/refills">Refills</NavLink>
                             </li>
                             <li ref={refDropdown} className="nav-item">
-                                <NavLink className="nav-link dropdown-toggle" onClick={() => setIsShow(!isShow)} to="#" id="navbarDropdownMenuLink" role="button" >Cartridges</NavLink>
+                                <div className="nav-link active dropdown-toggle" onClick={() => setIsShow(!isShow)} id="navbarDropdownMenuLink" role="button" >Cartridges</div>
                                 <ul  className={"dropdown-menu bg-light text-dark " + (isShow ? 'show' : '') } >
+                                    <li><NavLink className="dropdown-item" to="/cartridges" onClick={() => {setIsShow(false)}}>Cartridges</NavLink></li>
                                     <li><NavLink className="dropdown-item" to="/groups" onClick={() => {setIsShow(false)}}>Groups</NavLink></li>
                                     <li><NavLink className="dropdown-item" to="/models" onClick={() => {setIsShow(false)}}>Models</NavLink></li>
                                 </ul>

@@ -50,11 +50,10 @@ const ModelForm = props => {
             type: 'text',
             label: 'Description',
             errorMessage: 'Type the correct description',
-            valid: false,
+            valid: true,
             touched: false,
             validation: {
-                required: true,
-                minLength: 0,
+                required: false,
                 maxLength: 400
             }
         }

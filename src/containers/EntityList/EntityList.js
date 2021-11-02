@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Button } from '../../components/Button/Button';
-import { Table } from '../../components/Table/Table';
+import Table from '../../components/Table/Table';
 import { useHistory } from "react-router-dom";
 
 const EntityList = props => {
@@ -12,6 +12,7 @@ const EntityList = props => {
     useEffect(() => {
         const init = async () => {
             const response = await props.getEntities();
+            console.log(response);
 
             if(props.specialFields){
                 const currentState = [];

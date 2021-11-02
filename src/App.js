@@ -1,15 +1,19 @@
-import React from 'react'
+import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Navbar } from './components/Navbar/Navbar';
+import CartridgeForm from './containers/CartridgeForm/CartridgeForm';
 import ClientForm from './containers/ClientForm/ClientForm';
 import EmployeeForm from './containers/EmployeeForm/EmployeeForm';
 import EntityList from './containers/EntityList/EntityList';
 import GroupForm from './containers/GroupForm/GroupForm';
 import ModelForm from './containers/ModelForm/ModelForm';
+import CartridgeService from './services/CartridgeService';
 import ClientService from './services/ClientService';
 import EmployeeService from './services/EmployeeService';
 import GroupService from './services/GroupService';
 import ModelService from './services/ModelService';
+import Refills from './containers/Refills/Refills'
+import RefillService from './services/RefillService';
 
 function App() {
   return (
@@ -32,6 +36,14 @@ function App() {
           <Route path="/models" exact render={() => <EntityList entityName="Model" getEntities={ModelService.getModels} specialFields={{group: "title"}}/> } ></Route>
           <Route path="/models/add" component={ModelForm} ></Route>
           <Route path="/models/edit/:id" component={ModelForm} ></Route>
+
+          <Route path="/cartridges" exact render={() => <EntityList entityName="Cartridge" getEntities={CartridgeService.getCartridges} specialFields={{model: "title", client: "name"}}/> } ></Route>
+          <Route path="/cartridges/add" component={CartridgeForm} ></Route>
+          <Route path="/cartridges/edit/:id" component={CartridgeForm} ></Route>
+
+          <Route path="/refills" exact component={Refills} ></Route>
+          {/* <Route path="/refills" exact component={Refill} ></Route> */}
+         
         </Switch>
     </div>
   );
