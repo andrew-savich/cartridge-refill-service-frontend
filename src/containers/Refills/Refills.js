@@ -5,13 +5,11 @@ import Table from '../../components/Table/Table';
 const Refills = () => {
     const [refills, setRefills] = useState([]);
     console.log("Refills was setted: ", refills);
-    //const [refill, setRefill] = useState({});
 
     useEffect(() => {
         const init = async () =>{
             const responseRefills = await RefillService.getRefills();
             const responseRefillsData = responseRefills.data;
-            console.log(responseRefillsData);
 
             const tempRefills = [];
 
@@ -19,6 +17,7 @@ const Refills = () => {
                 const refill = {
                     id: entity.id,
                     date: entity.refillDate,
+                    uniqueIdentify: entity.cartridge.uniqueIdentify,
                     client: entity.cartridge.client.name,
                     group: entity.cartridge.model.group.title,
                     model: entity.cartridge.model.title,
@@ -27,17 +26,15 @@ const Refills = () => {
                     pcr: entity.changedPcr,
                     magnet: entity.changedMagnet,
                     rekel: entity.changedRakel,
-                    doser: entity.chngedDoserBlade,
+                    doser: entity.changedDoserBlade,
                     chip: entity.changedChip,
                     firmware: entity.changedFirmware,
                     comment: entity.comment,
                     refiller: entity.employee.login,
                     act: entity.isIssuedAct
                 };
-                console.log("built refill entity: ", refill);
                 tempRefills.push(refill);
             });
-            console.log("built tempRefills: ", tempRefills);
             
             setRefills(tempRefills);
             
@@ -49,11 +46,11 @@ const Refills = () => {
 
 
     return(
-        <div className="row">
-                {
-                   
-                }
-            </div>
+        <div className="container">
+            
+           { refills.length !== 0 ? <Table entities={refills} editEntityPath={"/sugar"} /> : <h3>Empty</h3> }
+
+        </div>
     )
 }
 

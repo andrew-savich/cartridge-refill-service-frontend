@@ -51,11 +51,7 @@ const EntityList = props => {
 
             <Button className="btn btn-primary" onClick={addEntityHandler} title={"Add " + props.entityName} />
 
-            <div className="row">
-                {
-                    entities.length !== 0 ? <Table entities={entities} editEntityPath={currentPath + "/edit"} /> : <h3>Empty</h3>
-                }
-            </div>
+            { entities.length !== 0 ? <Table entities={entities} editEntityPath={currentPath + "/edit"} /> : <h3>Empty</h3> }
 
         </div>
     )
