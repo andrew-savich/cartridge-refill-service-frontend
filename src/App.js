@@ -13,7 +13,7 @@ import EmployeeService from './services/EmployeeService';
 import GroupService from './services/GroupService';
 import ModelService from './services/ModelService';
 import Refills from './containers/Refills/Refills'
-import RefillService from './services/RefillService';
+import RefillForm from './containers/RefillForm/RefillForm';
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
           <Route path="/cartridges/edit/:id" component={CartridgeForm} ></Route>
 
           <Route path="/refills" exact component={Refills} ></Route>
-          {/* <Route path="/refills" exact component={Refill} ></Route> */}
+          <Route path="/refills/add" exact component={RefillForm} ></Route>
          
         </Switch>
     </div>

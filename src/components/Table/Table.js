@@ -20,7 +20,7 @@ const Table = props => {
     const insertTick = value => {
         if(value){
             return (
-                <img src={tick} width="20"/>
+                <img src={tick} width="20" alt="X"/>
             )
         }
     };

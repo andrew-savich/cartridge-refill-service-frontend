@@ -22,7 +22,11 @@ class CartridgeService {
 
     deleteCartridge(cartridgeId){
         return axios.delete(CARTRIDGE_API_BASE_URL + '/delete/' + cartridgeId);
-    }
+    };
+
+    getCartridgeByUniqueIdentify(uniqueIdentify){
+        return axios.get(CARTRIDGE_API_BASE_URL + '/getByUniqueIdentofy/' + uniqueIdentify);
+    };
 }
 
 export default new CartridgeService();
