@@ -11,6 +11,11 @@ class ModelService {
         return axios.get(MODEL_API_BASE_URL + '/get/' + modelId);
     };
 
+    getModelByTitle(modelTitle){
+        return axios.get(MODEL_API_BASE_URL + '/getByTitle/' + modelTitle);
+    };
+
+
     createModel(model){
         return axios.post(MODEL_API_BASE_URL + '/create', model);
     };

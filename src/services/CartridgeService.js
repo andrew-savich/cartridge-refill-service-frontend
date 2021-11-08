@@ -15,7 +15,6 @@ class CartridgeService {
         return axios.post(CARTRIDGE_API_BASE_URL + '/create', cartridge);
     };
 
-
     updateCartridge(cartridge, cartridgeId){
         return axios.put(CARTRIDGE_API_BASE_URL + '/update/' + cartridgeId, cartridge);
     };
@@ -25,7 +24,7 @@ class CartridgeService {
     };
 
     getCartridgeByUniqueIdentify(uniqueIdentify){
-        return axios.get(CARTRIDGE_API_BASE_URL + '/getByUniqueIdentofy/' + uniqueIdentify);
+        return axios.get(CARTRIDGE_API_BASE_URL + '/getByUniqueIdentify/' + uniqueIdentify);
     };
 }
 

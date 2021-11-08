@@ -3,8 +3,8 @@ import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 import CartridgeService from '../../services/CartridgeService';
 import RefillService from '../../services/RefillService';
+import EmployeeService from '../../services/EmployeeService';
 import { checkInput } from '../../utils/Validation';
-
 
 const RefillForm = props => {
     const [refillId] = useState(props.match.params.id);
@@ -242,11 +242,27 @@ const RefillForm = props => {
     const saveRefill = async event => {
         event.preventDefault();
 
+        const cartridgeEntity = (await CartridgeService.getCartridgeByUniqueIdentify(form.uniqueIdentify.value)).data;
+        
+        //hardcoe, have to be changed to current logined user
+        const employeeEntity = (await EmployeeService.getEmployeeById(1)).data;
+
         const refill = {
-            name: form.name.value,
-            contact: form.contact.value,
-            description: form.description.value
+            cartridge: cartridgeEntity,
+            employee: employeeEntity,
+            actualGrams: form.actualGrams.value,
+            comment: form.comment.value,
+            changedDrum: form.drum.value,
+            changedPcr: form.pcr.value,
+            changedMagnet: form.magnet.value,
+            changedRakel: form.rakel.value,
+            changedDoserBlade: form.doser.value,
+            changedChip: form.chip.value,
+            changedFirmware: form.firmware.value,
+            isIssuedAct: form.act.value
         };
+
+        console.log("sending refill: ", refill);
 
         if (refillId){
             try{

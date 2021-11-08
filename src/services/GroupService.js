@@ -11,6 +11,10 @@ class GroupService {
         return axios.get(GROUP_API_BASE_URL + '/get/' + groupId);
     };
 
+    getGroupByTitle(groupTitle){
+        return axios.get(GROUP_API_BASE_URL + '/getByTitle/' + groupTitle);
+    };
+
     createGroup(group){
         return axios.post(GROUP_API_BASE_URL + '/create', group);
     };

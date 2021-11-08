@@ -11,10 +11,13 @@ class ClientService {
         return axios.get(CLIENT_API_BASE_URL + '/get/' + clientId);
     };
 
+    getClientByName(clientName){
+        return axios.get(CLIENT_API_BASE_URL + '/getByName/' + clientName)
+    }
+
     createClient(client){
         return axios.post(CLIENT_API_BASE_URL + '/create', client);
     };
-
 
     updateClient(client, clientId){
         return axios.put(CLIENT_API_BASE_URL + '/update/' + clientId, client);

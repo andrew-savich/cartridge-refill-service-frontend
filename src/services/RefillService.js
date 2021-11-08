@@ -15,7 +15,6 @@ class RefillService {
         return axios.post(REFILL_API_BASE_URL + '/create', refill);
     };
 
-
     updateRefill(refill, refillId){
         return axios.put(REFILL_API_BASE_URL + '/update/' + refillId, refill);
     };
